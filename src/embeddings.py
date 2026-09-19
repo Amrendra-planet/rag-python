@@ -1,18 +1,16 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
-
 class EmbeddingRetriever:
     def __init__(self):
-        # Small, lightweight model suitable for a prototype
+        
         self.model = SentenceTransformer("all-MiniLM-L6-v2")
 
     def embed(self, text: str):
         return self.model.encode(text, normalize_embeddings=True)
 
     def similarity(self, query_embedding, document_embedding):
-        # Because embeddings are normalized,
-        # dot product is equivalent to cosine similarity.
+        
         return float(np.dot(query_embedding, document_embedding))
 
     def retrieve(self, query: str, documents: list, top_k: int = 4):

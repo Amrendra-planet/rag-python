@@ -1,16 +1,12 @@
 import json
 import os
-
 from dotenv import load_dotenv
 from openai import OpenAI
-
 from .retrieval import load_runbooks, HybridRetriever
-
 
 load_dotenv()
 
-
-SYSTEM_PROMPT = """You answer operational questions using only the supplied runbook excerpts.
+SYSTEM_PROMPT_TEMPLATE = """You answer operational questions using only the supplied runbook excerpts.
 
 Rules:
 - Cite only documents that actually support the answer.
@@ -71,7 +67,7 @@ def answer_question(question: str) -> dict:
         messages=[
             {
                 "role": "system",
-                "content": SYSTEM_PROMPT
+                "content": SYSTEM_PROMPT_TEMPLATE
             },
             {
                 "role": "user",

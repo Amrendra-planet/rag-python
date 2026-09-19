@@ -1,8 +1,6 @@
 import re
 from pathlib import Path
-
 from .embeddings import EmbeddingRetriever
-
 
 STOPWORDS = {
     "the", "is", "a", "an", "and", "or", "to", "of",
@@ -49,7 +47,6 @@ def lexical_score(query: str, document: dict):
 
     score = len(overlap)
 
-    # Give extra weight to exact phrases.
     query_lower = query.lower()
     document_lower = document["content"].lower()
 
